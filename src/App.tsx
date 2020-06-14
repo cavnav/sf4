@@ -1,5 +1,6 @@
 import React from 'react';
 import { FormSendRequest } from './components';
+import 'antd/dist/antd.css';
 import './App.css';
 
 
