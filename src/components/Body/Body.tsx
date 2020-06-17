@@ -3,7 +3,6 @@ import styled from 'styled-components';
 
 interface Props {
   children: React.ReactNode;
-  k?: string;
 }
 
 const Comp = getStyledComp();
