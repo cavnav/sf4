@@ -6,9 +6,9 @@ interface Props {
 }
 const Comp = getStyledComp();
 
-export function ControlPanel(props: Props) {
+export function Header(props: Props) {
   return <div 
-    className='ControlPanel'
+    className='Header'
     >
       { props.children }
     </div>;

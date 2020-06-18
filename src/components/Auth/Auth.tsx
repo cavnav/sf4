@@ -1,4 +1,5 @@
 import React from 'react';
+import { Redirect } from 'react-router-dom';
 import { 
   Form, 
   Input,
@@ -7,11 +8,23 @@ import {
 import styled from 'styled-components';
 
 const Comp = getStyledComp();
+const stateInit = {
+  isRequestSent: false,
+};
 
-export function FormSendRequest({
-
+export function Auth({
 }) {
-  return <Form
+  const [state, setState] = React.useState(stateInit);
+
+  return state.isRequestSent ? (
+    <Redirect 
+      to={{
+        pathname: '/userSpace',
+      }}
+    />) : (
+    <Form
+      className='Auth'
+      onFinish={onFinish}
     >    
     <div>
     <div style={{display: 'flex'}}>
@@ -91,14 +104,24 @@ export function FormSendRequest({
         type="primary" 
         htmlType="submit"
       >
-        Войти и отправить заявку
+        Отправить заявку
       </Button>
     </Form.Item>
     </div>
     </div>
     </div>
     
-  </Form>;
+  </Form>);
+
+  //------------------------------------------
+  
+  function onFinish(values: any) {
+    localStorage.setItem('userData', JSON.stringify(values));
+    setState({
+      ...state,
+      isRequestSent: true,
+    });
+  }
 }   
 
 function getStyledComp() {
