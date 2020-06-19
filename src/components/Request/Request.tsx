@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 
 const Comp = getStyledComp();
@@ -10,12 +10,14 @@ const stateInit = {
 export function Request({
 }) {
   const [state, setState] = React.useState(stateInit);
+  const history = useHistory();
 
   return (
     <div
       className='Request'
     >
       Ожидайте запрос документов, ориентировочный срок запроса документов 30 минут.
+      <button onClick={() => history.goBack()}>Back</button>
     </div>
   );
 
