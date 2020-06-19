@@ -6,6 +6,8 @@ import {
   Body,
   UserSpace,
   Header,
+  RouteTransit,
+  Request,
 } from './components/';
 import { Route, Link } from 'react-router-dom';
 import 'antd/dist/antd.css';
@@ -21,7 +23,7 @@ function App() {
             to='/sendRequest'
           >Отправить заявку</Link>
           <Link
-            to='/userSpace'
+            to='/auth'
           >Войти</Link>
         </Header>
       <ControlPanel>Actions
@@ -38,12 +40,21 @@ function App() {
         />
       </Body>
       <Route 
-        path='/sendRequest'
+        path='/auth'
         render={() => <Dialog>
           <Auth />
         </Dialog>
         }
       />
+      <RouteTransit
+        isAuth={true}
+        path='/sendRequest'
+        redirectPath='/form'
+      >
+        <Dialog>
+          <Request />
+        </Dialog>
+      </RouteTransit>
     </div>
   );
 

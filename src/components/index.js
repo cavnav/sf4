@@ -6,3 +6,5 @@ export { UserSpace } from './UserSpace/UserSpace';
 export { RequestList } from './RequestList/RequestList';
 export { Dialog } from './Dialog/Dialog';
 export { Request } from './Request/Request';
+export { RouteTransit } from './RouteTransit/RouteTransit';
+export { FormRequest } from './FormRequest/FormRequest';
