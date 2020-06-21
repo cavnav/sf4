@@ -49,11 +49,7 @@ function App() {
       <RouteTransit
         isAuth={true}
         path='/sendRequest'
-        redirectPath='/form'
-      >
-        <Dialog>
-          <Request />
-        </Dialog>
+      >        
       </RouteTransit>
     </div>
   );

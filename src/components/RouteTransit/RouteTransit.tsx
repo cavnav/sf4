@@ -1,5 +1,10 @@
 import React, { FunctionComponent } from 'react';
 import { Redirect, Route } from 'react-router-dom';
+import {
+  FormRequest,
+  Dialog,
+  Auth,
+} from '../';
 import styled from 'styled-components';
 
 const Comp = getStyledComp();
@@ -15,20 +20,17 @@ interface Props {
 export const RouteTransit: FunctionComponent<Props> = ({
   isAuth,
   path,
-  children,
 }) => {
 
   return <Route
     path={path}
     render={() => isAuth === false ?
-      <div>{ children }</div> : <Redirect
-    to={{
-      pathname: './',
-    }}
-  />;
-
-
-
+      <Dialog>
+        <Auth />
+      </Dialog> :
+      <FormRequest />
+    }
+  />
   //------------------------------------------
 }   
 
