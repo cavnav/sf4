@@ -1,5 +1,5 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Redirect } from 'react-router-dom';
 import { 
   Form, 
   Input,
@@ -17,8 +17,11 @@ export function FormRequest({
   const [state, setState] = React.useState(stateInit);
   const history = useHistory();
 
-  return (
-    <div
+  return state.isRequestSent ? (<Redirect
+    to={{
+      pathname: '/userSpace',
+    }}
+    />) : (<div
       className='Request'
     >
       Форма заявки.
@@ -29,45 +32,52 @@ export function FormRequest({
       <Form.Item
         label="моб.телефон"
         name="phone"
-        rules={[{ required: true, message: 'Please input your username!' }]}
+        rules={[{ required: false, message: 'Please input your username!' }]}
       >
-        <Input />      
+        <Input 
+        defaultValue={'79265371034'}/>      
       </Form.Item>
       
       <Form.Item
           label="ФИО"
           name="fio"
-          rules={[{ required: true, message: 'Please input your username!' }]}
+          rules={[{ required: false, message: 'Please input your username!' }]}
         >
-        <Input />      
+        <Input 
+        defaultValue={'Горячев Дмитрий Ильич'}/>      
       </Form.Item>
       <Form.Item
           label="почта"
           name="email"
-          rules={[{ required: true, message: 'Please input your username!' }]}
+          rules={[{ required: false, message: 'Please input your username!' }]}
         >
-        <Input />      
+        <Input 
+        defaultValue={'ss@gmail.com'}/>      
       </Form.Item>
       <Form.Item
           label="название компании / ИНН"
           name="company"
-          rules={[{ required: true, message: 'Please input your username!' }]}
+          rules={[{ required: false, message: 'Please input your username!' }]}
         >
-        <Input />      
+        <Input 
+        defaultValue={'11111'}/>      
       </Form.Item>
       <Form.Item
           label="название контрагента / ИНН"
           name="debitor"
-          rules={[{ required: true, message: 'Please input your username!' }]}
+          rules={[{ required: false, message: 'Please input your username!' }]}          
         >
-        <Input />      
+        <Input 
+          defaultValue={'2222'}
+        />      
       </Form.Item>
       <Form.Item
           label="сумма"
           name="sum"
-          rules={[{ required: true, message: 'Please input your username!' }]}
+          rules={[{ required: false, message: 'Please input your username!' }]}
         >
-        <Input />      
+        <Input 
+        defaultValue={'1234567'}/>      
       </Form.Item>
 
       <Form.Item>
@@ -84,11 +94,15 @@ export function FormRequest({
   );
 
   //------------------------------------------
+  function onFinish() {
+    setState(state => {
+      return { 
+        ...state,
+        isRequestSent: true,
+      };
+    });
+  }
 }   
-
-function onFinish() {
-  
-}
 
 function getStyledComp() {
   return styled.div`
