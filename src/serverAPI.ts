@@ -15,5 +15,19 @@ export const serverAPI = {
     })
     .then(res => res.json())
     .then(res => console.table(res));
-  }
+  },
+  sendRequest: (request: Request) => {    
+    return new Promise((resolve, err) => {
+      const users = localStorage.getItem(users);
+      const user = users.find(u => u.id === request.userId);
+      user.requests.push(request.item);
+      localStorage.setItem(users, users);
+      setTimeout(() => resolve(request), 1000);
+    });
+  },
+  auth: (user: User) => {
+
+  },
+  getRequests: () => {},
+  getRequest: () => {}
 };

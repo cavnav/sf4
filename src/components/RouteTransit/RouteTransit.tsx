@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FC } from 'react';
 import { Redirect, Route } from 'react-router-dom';
 import {
   FormRequest,
@@ -17,7 +17,7 @@ interface Props {
   path: string;
 }
 
-export const RouteTransit: FunctionComponent<Props> = ({
+export const RouteTransit: FC<Props> = ({
   isAuth,
   path,
 }) => {
