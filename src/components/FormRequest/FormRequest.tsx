@@ -5,7 +5,10 @@ import {
   Input,
   Button, 
 } from 'antd';
+import { serverAPI } from '../../serverAPI';
+import { Request } from '../../interfaces';
 import styled from 'styled-components';
+import { Store } from 'antd/lib/form/interface';
 
 const Comp = getStyledComp();
 const stateInit = {
@@ -31,7 +34,7 @@ export function FormRequest({
     >    
       <Form.Item
         label="моб.телефон"
-        name="phone"
+        name="userId"
         rules={[{ required: false, message: 'Please input your username!' }]}
       >
         <Input 
@@ -94,13 +97,18 @@ export function FormRequest({
   );
 
   //------------------------------------------
-  function onFinish() {
-    
-    setState(state => {
-      return { 
-        ...state,
-        isRequestSent: true,
-      };
+  function onFinish(values: Store) {
+    serverAPI.sendRequest({
+      userId,
+      request: values,
+    })
+    .then(() => {
+      setState(state => {
+        return { 
+          ...state,
+          isRequestSent: true,
+        };
+      });
     });
   }
 }   

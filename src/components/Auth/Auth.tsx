@@ -5,12 +5,18 @@ import {
   Input,
   Button, 
 } from 'antd';
+import { UserId } from  '../../interfaces';
 import styled from 'styled-components';
+import { serverAPI } from '../../serverAPI';
 
 const Comp = getStyledComp();
 const stateInit = {
   isRequestSent: false,
 };
+
+interface AuthIntf {
+  userId: UserId;
+}
 
 export function Auth({
 }) {
@@ -28,7 +34,7 @@ export function Auth({
     >    
       <Form.Item
         label="моб.телефон"
-        name="phone"
+        name="userId"
         rules={[{ required: true, message: 'Please input your username!' }]}
       >
         <Input />      
@@ -52,11 +58,14 @@ export function Auth({
 
   //------------------------------------------
   
-  function onFinish(values: any) {
-    localStorage.setItem('userData', JSON.stringify(values));
-    setState({
-      ...state,
-      isRequestSent: true,
+  function onFinish(vals: Partial<AuthIntf>) {
+    const { userId } = vals;
+    serverAPI.auth({ userId })
+    .then(() => {
+      setState({
+        ...state,
+        isRequestSent: true,
+      });
     });
   }
 }   

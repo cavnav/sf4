@@ -1,3 +1,7 @@
+import { store } from "./store";
+import { User, UserId } from './interfaces';
+import { UserSpace } from "./components";
+
 interface RequestCompaniesList {
   query: string;
 }
@@ -16,18 +20,19 @@ export const serverAPI = {
     .then(res => res.json())
     .then(res => console.table(res));
   },
-  sendRequest: (request: Request) => {    
+  sendRequest(request: Partial<{ request: Request }>):Promise<Request> {    
     return new Promise((resolve, err) => {
-      const users = localStorage.getItem(users);
-      const user = users.find(u => u.id === request.userId);
-      user.requests.push(request.item);
-      localStorage.setItem(users, users);
+     
+      store.addRequest({
+        request,
+      });
+
       setTimeout(() => resolve(request), 1000);
     });
   },
-  auth: (user: User) => {
-
+  auth(userId: UserId): Promise<UserId> {
+    store.setUser({ user });
   },
   getRequests: () => {},
-  getRequest: () => {}
+  getRequest: () => {},
 };
