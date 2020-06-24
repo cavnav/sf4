@@ -1,5 +1,5 @@
 import { store } from "./store";
-import { User, UserId } from './interfaces';
+import { User, UserId, SendRequest } from './interfaces';
 import { UserSpace } from "./components";
 
 interface RequestCompaniesList {
@@ -20,18 +20,21 @@ export const serverAPI = {
     .then(res => res.json())
     .then(res => console.table(res));
   },
-  sendRequest(request: Partial<{ request: Request }>):Promise<Request> {    
-    return new Promise((resolve, err) => {
+  sendRequest(props: SendRequest):Promise<SendRequest> {    
+    return new Promise(resolve => {
      
+      const { request } = props;
       store.addRequest({
         request,
       });
 
-      setTimeout(() => resolve(request), 1000);
+      setTimeout(() => resolve(props), 1000);
     });
   },
-  auth(userId: UserId): Promise<UserId> {
-    store.setUser({ user });
+  auth(props: Partial<{ userId: UserId }>): Promise<UserId> {
+    const { userId } = props;
+    store.setUser({ userId });
+    return new Promise(resolve => setTimeout(resolve, 1000));
   },
   getRequests: () => {},
   getRequest: () => {},

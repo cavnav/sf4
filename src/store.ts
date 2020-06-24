@@ -5,14 +5,19 @@ import {
 } from './interfaces';
 
 interface StoreIntf {
-  userId: UserId;
-  users: User[];
-  requests: Request[];
+  state: {
+    userId: UserId;
+    users: User[];
+    requests: Request[];
+  }
 }
 
 class Store<StoreIntf> {
-  userId = '';
-  users = [];
+  state = {
+    userId: '',
+    users: [],
+    requests: [],
+  };
 
   setUser(props: Partial<{userId: UserId}>) {
     this.userId = props.userId;
@@ -26,6 +31,10 @@ class Store<StoreIntf> {
     request,
   }) {
     this.requests[userId].push(request);
+  }
+  
+  getState() {
+    return this.state;
   }
 }
 

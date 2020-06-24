@@ -1,17 +1,22 @@
+export type UserId = string | undefined;
+
 export interface User {
-  userId: string | undefined;
+  userId: UserId;
   fio: string;
   email: string;
   companyINN: string;
 }
 
-export type UserId = Pick<User, 'userId'>;
-
 export interface Request {
-  userId: string;
+  userId: UserId;
   fio: string;
   email: string;
   company: string;
   debitor: string;
   sum: number;
+}
+
+export interface SendRequest {
+  userId: UserId;
+  request: Request;
 }

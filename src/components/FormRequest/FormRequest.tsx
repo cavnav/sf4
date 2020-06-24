@@ -5,8 +5,9 @@ import {
   Input,
   Button, 
 } from 'antd';
+import { store } from '../../store';
 import { serverAPI } from '../../serverAPI';
-import { Request } from '../../interfaces';
+import { SendRequest, Request } from '../../interfaces';
 import styled from 'styled-components';
 import { Store } from 'antd/lib/form/interface';
 
@@ -31,16 +32,7 @@ export function FormRequest({
       <Form
       className='Request'
       onFinish={onFinish}
-    >    
-      <Form.Item
-        label="моб.телефон"
-        name="userId"
-        rules={[{ required: false, message: 'Please input your username!' }]}
-      >
-        <Input 
-        defaultValue={'79265371034'}/>      
-      </Form.Item>
-      
+    >          
       <Form.Item
           label="ФИО"
           name="fio"
@@ -97,7 +89,8 @@ export function FormRequest({
   );
 
   //------------------------------------------
-  function onFinish(values: Store) {
+  function onFinish(values: any) {
+    const { userId } = store.getState();
     serverAPI.sendRequest({
       userId,
       request: values,
