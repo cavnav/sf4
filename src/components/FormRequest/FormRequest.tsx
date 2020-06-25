@@ -89,7 +89,7 @@ export function FormRequest({
   );
 
   //------------------------------------------
-  function onFinish(values: any) {
+  function onFinish(values: Store) {
     const { userId } = store.getState();
     serverAPI.sendRequest({
       userId,
