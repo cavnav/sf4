@@ -1,4 +1,4 @@
-export type UserId = string | undefined;
+export type UserId = string;
 
 export interface User {
   userId: UserId;
